@@ -10,6 +10,7 @@ const styleString = `
 }
 
 .${ImageCarousel.CLASSES.advanceImageButton} {
+  border-radius: 0.5rem;
   font-family: inherit;
   font-size: 3em;
   padding: 0.25rem 0.5rem;
