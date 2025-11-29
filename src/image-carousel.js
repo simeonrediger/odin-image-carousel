@@ -76,7 +76,7 @@ export default class ImageCarousel {
 
     #setGridDimensions(images) {
         const [maxImageWidth, maxImageHeight] =
-            this.#getMaxImageDimensions(images);
+            this.#getMaxElementDimensions(images);
 
         this.#container.style.gridTemplateColumns = [
             'auto',
@@ -87,23 +87,23 @@ export default class ImageCarousel {
         this.#container.style.gridTemplateRows = `${maxImageHeight}px`;
     }
 
-    #getMaxImageDimensions(images) {
-        let maxImageWidth = 0;
-        let maxImageHeight = 0;
+    #getMaxElementDimensions(elements) {
+        let maxElementWidth = 0;
+        let maxElementHeight = 0;
 
-        for (const image of images) {
-            const [width, height] = this.#getElementDimensions(image);
+        for (const element of elements) {
+            const [width, height] = this.#getElementDimensions(element);
 
-            if (width > maxImageWidth) {
-                maxImageWidth = width;
+            if (width > maxElementWidth) {
+                maxElementWidth = width;
             }
 
-            if (height > maxImageHeight) {
-                maxImageHeight = height;
+            if (height > maxElementHeight) {
+                maxElementHeight = height;
             }
         }
 
-        return [maxImageWidth, maxImageHeight];
+        return [maxElementWidth, maxElementHeight];
     }
 
     #getElementDimensions(element) {
