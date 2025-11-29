@@ -8,8 +8,6 @@ export default class ImageCarousel {
     });
 
     #container;
-    #previousImageButton;
-    #nextImageButton;
     #imagesContainer;
     #currentImage;
 
@@ -28,13 +26,13 @@ export default class ImageCarousel {
         const firstImage = this.#imagesContainer.children[0];
         this.#setCurrentImage(firstImage);
 
-        this.#previousImageButton = this.#createPreviousImageButton();
-        this.#nextImageButton = this.#createNextImageButton();
+        const previousImageButton = this.#createPreviousImageButton();
+        const nextImageButton = this.#createNextImageButton();
 
         this.#container.append(
-            this.#previousImageButton,
+            previousImageButton,
             this.#imagesContainer,
-            this.#nextImageButton,
+            nextImageButton,
         );
 
         this.#setGridDimensions(images);
