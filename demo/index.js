@@ -1,1 +1,1 @@
-import packageName from '../src/index.js';
+import imageCarousel from '../src/index.js';
