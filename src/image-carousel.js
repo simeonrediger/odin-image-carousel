@@ -6,6 +6,7 @@ export default class ImageCarousel {
     });
 
     #container;
+    #imagesContainer;
 
     constructor(containerElement) {
         this.#container = containerElement;
@@ -18,9 +19,9 @@ export default class ImageCarousel {
         const images = Array.from(this.#container.children);
         this.#validateImages(images);
         this.#addClassToImages(images);
-        const imagesContainer = this.#createImagesContainer(images);
+        this.#imagesContainer = this.#createImagesContainer(images);
 
-        this.#container.append(imagesContainer);
+        this.#container.append(this.#imagesContainer);
     }
 
     #addClassToImages(images) {
