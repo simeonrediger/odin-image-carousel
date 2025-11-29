@@ -1,5 +1,6 @@
 export default class ImageCarousel {
     static CLASSES = Object.freeze({
+        container: 'image-carousel-container',
         imagesContainer: 'image-carousel-images-container',
         image: 'image-carousel-image',
     });
@@ -12,6 +13,8 @@ export default class ImageCarousel {
     }
 
     #build() {
+        this.#container.classList.add(ImageCarousel.CLASSES.container);
+
         const images = Array.from(this.#container.children);
         this.#validateImages(images);
         this.#addClassToImages(images);
