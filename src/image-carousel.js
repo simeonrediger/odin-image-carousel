@@ -83,6 +83,8 @@ export default class ImageCarousel {
             `${maxImageWidth}px`,
             'auto',
         ].join(' ');
+
+        this.#container.style.gridTemplateRows = `${maxImageHeight}px`;
     }
 
     #getMaxImageDimensions(images) {
