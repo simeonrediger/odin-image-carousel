@@ -3,6 +3,7 @@ export default class ImageCarousel {
         container: 'image-carousel-container',
         imagesContainer: 'image-carousel-images-container',
         image: 'image-carousel-image',
+        currentImage: 'image-carousel-current-image',
     });
 
     #container;
@@ -20,8 +21,20 @@ export default class ImageCarousel {
         this.#validateImages(images);
         this.#addClassToImages(images);
         this.#imagesContainer = this.#createImagesContainer(images);
+        this.#updateImagePositionClasses();
 
         this.#container.append(this.#imagesContainer);
+    }
+
+    #updateImagePositionClasses() {
+        const lastCurrentImage = this.#imagesContainer.querySelector(
+            ImageCarousel.CLASSES.currentImage,
+        );
+
+        lastCurrentImage?.classList.remove(ImageCarousel.CLASSES.currentImage);
+
+        const currentImage = this.#imagesContainer.children[0];
+        currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
     }
 
     #addClassToImages(images) {
