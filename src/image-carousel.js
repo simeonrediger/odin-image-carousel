@@ -37,7 +37,7 @@ export default class ImageCarousel {
             this.#nextImageButton,
         );
 
-        this.#setColumnWidths(images);
+        this.#setGridDimensions(images);
     }
 
     #setCurrentImage(image) {
@@ -74,7 +74,7 @@ export default class ImageCarousel {
         }
     }
 
-    #setColumnWidths(images) {
+    #setGridDimensions(images) {
         const [maxImageWidth, maxImageHeight] =
             this.#getMaxImageDimensions(images);
 
