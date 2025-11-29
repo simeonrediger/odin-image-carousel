@@ -18,6 +18,7 @@ const styleString = `
 }
 
 .${ImageCarousel.CLASSES.image} {
+  border-radius: 0.5rem;
   display: none;
 }
 
