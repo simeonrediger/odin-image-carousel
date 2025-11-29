@@ -1,9 +1,7 @@
 const imageCarouselAttribute = 'data-image-carousel';
 
 function init(root = document) {
-    const instances = Array.from(
-        root.querySelectorAll(`[${imageCarouselAttribute}]`),
-    );
+    const instances = root.querySelectorAll(`[${imageCarouselAttribute}]`);
 }
 
 const imageCarousel = {
