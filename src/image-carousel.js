@@ -5,11 +5,15 @@ export default class ImageCarousel {
         imagesContainer: 'image-carousel-images-container',
         image: 'image-carousel-image',
         currentImage: 'image-carousel-current-image',
+        navbar: 'image-carousel-navbar',
+        navList: 'image-carousel-nav-list',
+        navItemButton: 'image-carousel-nav-item-button',
     });
 
     #container;
     #imagesContainer;
     #currentImage;
+    #navList;
 
     constructor(containerElement) {
         this.#container = containerElement;
@@ -29,10 +33,13 @@ export default class ImageCarousel {
         const previousImageButton = this.#createPreviousImageButton();
         const nextImageButton = this.#createNextImageButton();
 
+        const navbar = this.#createNavbar(images.length);
+
         this.#container.append(
             previousImageButton,
             this.#imagesContainer,
             nextImageButton,
+            navbar,
         );
 
         this.#setGridDimensions(images);
@@ -153,6 +160,24 @@ export default class ImageCarousel {
         button.ariaLabel = ariaLabel;
         button.addEventListener('click', onClick);
         return button;
+    }
+
+    #createNavbar(navItemCount) {
+        const navbar = document.createElement('nav');
+        navbar.classList.add(ImageCarousel.CLASSES.navbar);
+        this.#navList = document.createElement('ul');
+        this.#navList.classList.add(ImageCarousel.CLASSES.navList);
+        navbar.append(this.#navList);
+
+        for (let i = 0; i < navItemCount; i++) {
+            const navItem = document.createElement('li');
+            const navItemButton = document.createElement('button');
+            navItemButton.classList.add(ImageCarousel.CLASSES.navItemButton);
+            navItem.append(navItemButton);
+            this.#navList.append(navItem);
+        }
+
+        return navbar;
     }
 
     #validateImages(images) {

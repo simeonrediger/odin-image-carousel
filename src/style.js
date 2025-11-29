@@ -8,6 +8,10 @@ const styleString = `
   justify-items: center;
   align-items: center;
   gap: 1rem;
+
+  grid-template-areas:
+    '. .      .'
+    '. navbar .'
 }
 
 .${ImageCarousel.CLASSES.advanceImageButton} {
@@ -24,6 +28,21 @@ const styleString = `
 
 .${ImageCarousel.CLASSES.currentImage} {
   display: block;
+}
+
+.${ImageCarousel.CLASSES.navbar} {
+  grid-area: navbar;
+}
+
+.${ImageCarousel.CLASSES.navList} {
+  display: flex;
+  gap: 1rem;
+}
+
+.${ImageCarousel.CLASSES.navItemButton} {
+  border-radius: 0.75rem;
+  height: 0.75rem;
+  width: 0.75rem;
 }
 
 `;
