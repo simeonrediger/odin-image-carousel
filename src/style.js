@@ -23,7 +23,7 @@ const styleString = `
 }
 
 .${ImageCarousel.CLASSES.currentImage} {
-  display: inline-block;
+  display: block;
 }
 
 `;
