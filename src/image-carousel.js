@@ -73,6 +73,20 @@ export default class ImageCarousel {
         this.#setCurrentImage(nextImage);
     }
 
+    #selectImage(event) {
+        const button = event.target.closest('button');
+
+        if (!button) {
+            return;
+        }
+
+        const navItem = button.closest('li');
+        const imageIndex = Array.from(this.#navList.children).indexOf(navItem);
+        const images = this.#imagesContainer.children;
+        const selectedImage = images[imageIndex];
+        this.#setCurrentImage(selectedImage);
+    }
+
     #addClassToImages(images) {
         for (const image of images) {
             image.classList.add(ImageCarousel.CLASSES.image);
@@ -177,6 +191,7 @@ export default class ImageCarousel {
             this.#navList.append(navItem);
         }
 
+        navbar.addEventListener('click', this.#selectImage.bind(this));
         return navbar;
     }
 
