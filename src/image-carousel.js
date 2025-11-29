@@ -1,12 +1,15 @@
 export default class ImageCarousel {
     static CLASSES = Object.freeze({
         container: 'image-carousel-container',
+        advanceImageButton: 'image-carousel-advance-image-button',
         imagesContainer: 'image-carousel-images-container',
         image: 'image-carousel-image',
         currentImage: 'image-carousel-current-image',
     });
 
     #container;
+    #previousImageButton;
+    #nextImageButton;
     #imagesContainer;
     #currentImage;
 
@@ -25,14 +28,16 @@ export default class ImageCarousel {
         const firstImage = this.#imagesContainer.children[0];
         this.#setCurrentImage(firstImage);
 
-        const previousImageButton = this.#createPreviousImageButton();
-        const nextImageButton = this.#createNextImageButton();
+        this.#previousImageButton = this.#createPreviousImageButton();
+        this.#nextImageButton = this.#createNextImageButton();
 
         this.#container.append(
-            previousImageButton,
+            this.#previousImageButton,
             this.#imagesContainer,
-            nextImageButton,
+            this.#nextImageButton,
         );
+
+        this.#setColumnWidths(images);
     }
 
     #setCurrentImage(image) {
@@ -69,6 +74,56 @@ export default class ImageCarousel {
         }
     }
 
+    #setColumnWidths(images) {
+        const maxImageAdvanceButtonWidth = Math.max(
+            this.#getElementDimensions(this.#previousImageButton)[0],
+            this.#getElementDimensions(this.#nextImageButton)[0],
+        );
+
+        const [maxImageWidth, maxImageHeight] =
+            this.#getMaxImageDimensions(images);
+
+        this.#container.style.gridTemplateColumns = [
+            `${maxImageAdvanceButtonWidth}px`,
+            `${maxImageWidth}px`,
+            `${maxImageAdvanceButtonWidth}px`,
+        ].join(' ');
+    }
+
+    #getMaxImageDimensions(images) {
+        let maxImageWidth = 0;
+        let maxImageHeight = 0;
+
+        for (const image of images) {
+            const [width, height] = this.#getElementDimensions(image);
+
+            if (width > maxImageWidth) {
+                maxImageWidth = width;
+            }
+
+            if (height > maxImageHeight) {
+                maxImageHeight = height;
+            }
+        }
+
+        return [maxImageWidth, maxImageHeight];
+    }
+
+    #getElementDimensions(element) {
+        const elementDisplay = element.style.display;
+        const elementVisibility = element.style.visibility;
+
+        element.style.visibility = 'hidden';
+        element.style.display = 'block';
+
+        const elementRect = element.getBoundingClientRect();
+
+        element.style.display = elementDisplay;
+        element.style.visibility = elementVisibility;
+
+        return [elementRect.width, elementRect.height];
+    }
+
     #createImagesContainer(images) {
         const imagesContainer = document.createElement('div');
         imagesContainer.classList.add(ImageCarousel.CLASSES.imagesContainer);
@@ -98,6 +153,7 @@ export default class ImageCarousel {
 
     #createAdvanceImageButton({ textContent, ariaLabel, onClick }) {
         const button = document.createElement('button');
+        button.classList.add(ImageCarousel.CLASSES.advanceImageButton);
         button.textContent = textContent;
         button.ariaLabel = ariaLabel;
         button.addEventListener('click', onClick);
