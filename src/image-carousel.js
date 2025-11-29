@@ -44,9 +44,24 @@ export default class ImageCarousel {
         this.#currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
     }
 
-    #showPreviousImage() {}
+    #showPreviousImage() {
+        const images = Array.from(this.#imagesContainer.children);
+        const currentImageIndex = images.indexOf(this.#currentImage);
 
-    #showNextImage() {}
+        const previousImageIndex =
+            (currentImageIndex - 1 + images.length) % images.length;
+
+        const previousImage = images[previousImageIndex];
+        this.#setCurrentImage(previousImage);
+    }
+
+    #showNextImage() {
+        const images = Array.from(this.#imagesContainer.children);
+        const currentImageIndex = images.indexOf(this.#currentImage);
+        const nextImageIndex = (currentImageIndex + 1) % images.length;
+        const nextImage = images[nextImageIndex];
+        this.#setCurrentImage(nextImage);
+    }
 
     #addClassToImages(images) {
         for (const image of images) {
