@@ -75,18 +75,13 @@ export default class ImageCarousel {
     }
 
     #setColumnWidths(images) {
-        const maxImageAdvanceButtonWidth = Math.max(
-            this.#getElementDimensions(this.#previousImageButton)[0],
-            this.#getElementDimensions(this.#nextImageButton)[0],
-        );
-
         const [maxImageWidth, maxImageHeight] =
             this.#getMaxImageDimensions(images);
 
         this.#container.style.gridTemplateColumns = [
-            `${maxImageAdvanceButtonWidth}px`,
+            'auto',
             `${maxImageWidth}px`,
-            `${maxImageAdvanceButtonWidth}px`,
+            'auto',
         ].join(' ');
     }
 
