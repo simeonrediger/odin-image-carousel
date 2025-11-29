@@ -1,4 +1,9 @@
 export default class ImageCarousel {
+    static CLASSES = Object.freeze({
+        imagesContainer: 'image-carousel-images-container',
+        image: 'image-carousel-image',
+    });
+
     #container;
 
     constructor(containerElement) {
@@ -17,13 +22,13 @@ export default class ImageCarousel {
 
     #addClassToImages(images) {
         for (const image of images) {
-            image.classList.add('image-carousel-image');
+            image.classList.add(ImageCarousel.CLASSES.image);
         }
     }
 
     #createImagesContainer(images) {
         const imagesContainer = document.createElement('div');
-        imagesContainer.classList.add('image-carousel-images-container');
+        imagesContainer.classList.add(ImageCarousel.CLASSES.imagesContainer);
         imagesContainer.append(...images);
         return imagesContainer;
     }
