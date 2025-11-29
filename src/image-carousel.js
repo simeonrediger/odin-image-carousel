@@ -25,7 +25,14 @@ export default class ImageCarousel {
         const firstImage = this.#imagesContainer.children[0];
         this.#setCurrentImage(firstImage);
 
-        this.#container.append(this.#imagesContainer);
+        const previousImageButton = this.#createPreviousImageButton();
+        const nextImageButton = this.#createNextImageButton();
+
+        this.#container.append(
+            previousImageButton,
+            this.#imagesContainer,
+            nextImageButton,
+        );
     }
 
     #setCurrentImage(image) {
@@ -36,6 +43,10 @@ export default class ImageCarousel {
         this.#currentImage = image;
         this.#currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
     }
+
+    #showPreviousImage() {}
+
+    #showNextImage() {}
 
     #addClassToImages(images) {
         for (const image of images) {
@@ -48,6 +59,34 @@ export default class ImageCarousel {
         imagesContainer.classList.add(ImageCarousel.CLASSES.imagesContainer);
         imagesContainer.append(...images);
         return imagesContainer;
+    }
+
+    #createPreviousImageButton() {
+        const button = this.#createAdvanceImageButton({
+            textContent: '⮜',
+            ariaLabel: 'Show previous image',
+            onClick: this.#showPreviousImage.bind(this),
+        });
+
+        return button;
+    }
+
+    #createNextImageButton() {
+        const button = this.#createAdvanceImageButton({
+            textContent: '⮞',
+            ariaLabel: 'Show next image',
+            onClick: this.#showNextImage.bind(this),
+        });
+
+        return button;
+    }
+
+    #createAdvanceImageButton({ textContent, ariaLabel, onClick }) {
+        const button = document.createElement('button');
+        button.textContent = textContent;
+        button.ariaLabel = ariaLabel;
+        button.addEventListener('click', onClick);
+        return button;
     }
 
     #validateImages(images) {
