@@ -7,6 +7,7 @@ const styleString = `
   justify-content: center;
   justify-items: center;
   align-items: center;
+  gap: 1rem;
 }
 
 .${ImageCarousel.CLASSES.advanceImageButton} {
