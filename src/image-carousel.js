@@ -8,6 +8,7 @@ export default class ImageCarousel {
 
     #container;
     #imagesContainer;
+    #currentImage;
 
     constructor(containerElement) {
         this.#container = containerElement;
@@ -21,20 +22,19 @@ export default class ImageCarousel {
         this.#validateImages(images);
         this.#addClassToImages(images);
         this.#imagesContainer = this.#createImagesContainer(images);
-        this.#updateImagePositionClasses();
+        const firstImage = this.#imagesContainer.children[0];
+        this.#setCurrentImage(firstImage);
 
         this.#container.append(this.#imagesContainer);
     }
 
-    #updateImagePositionClasses() {
-        const lastCurrentImage = this.#imagesContainer.querySelector(
+    #setCurrentImage(image) {
+        this.#currentImage?.classList.remove(
             ImageCarousel.CLASSES.currentImage,
         );
 
-        lastCurrentImage?.classList.remove(ImageCarousel.CLASSES.currentImage);
-
-        const currentImage = this.#imagesContainer.children[0];
-        currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
+        this.#currentImage = image;
+        this.#currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
     }
 
     #addClassToImages(images) {
