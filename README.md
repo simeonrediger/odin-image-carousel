@@ -39,3 +39,19 @@ Default is `document`. Must be an `Element`, `Document`, or `DocumentFragment`. 
 ## `cycleIntervalInMs`
 
 Default is `5000`. Sets the interval in milliseconds that the image carousel will cycle images. Setting to `null` will disable automatic image cycling.
+
+# Styling
+
+| Element                        | Selector                                   |
+| ------------------------------ | ------------------------------------------ |
+| Image carousel container       | `.image-carousel-container`                |
+| Both advance image buttons     | `.image-carousel-advance-image-button`     |
+| Previous image button          | `.image-carousel-previous-image-button`    |
+| Next image button              | `.image-carousel-next-image-button`        |
+| Images container               | `.image-carousel-images-container`         |
+| Any image                      | `.image-carousel-image`                    |
+| Current image                  | `.image-carousel-current-image`            |
+| Image navbar                   | `.image-carousel-navbar`                   |
+| Image nav list                 | `.image-carousel-nav-list`                 |
+| Image nav item button          | `.image-carousel-nav-item-button`          |
+| Selected image nav item button | `.image-carousel-selected-nav-item-button` |
