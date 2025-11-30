@@ -17,6 +17,8 @@ export default class ImageCarousel {
     #navList;
     #selectedNavItemButton;
 
+    #hasImages;
+
     constructor(containerElement) {
         this.#container = containerElement;
         this.#build();
@@ -26,6 +28,8 @@ export default class ImageCarousel {
         this.#container.classList.add(ImageCarousel.CLASSES.container);
 
         const images = Array.from(this.#container.children);
+        this.#hasImages = images.length > 0;
+
         this.#validateImages(images);
         this.#addClassToImages(images);
         this.#imagesContainer = this.#createImagesContainer(images);
@@ -44,11 +48,12 @@ export default class ImageCarousel {
 
         this.#setGridDimensions(images);
 
-        const firstImageIndex = 0;
-        const firstImage = this.#imagesContainer.children[firstImageIndex];
-        this.#setCurrentImage(firstImage, firstImageIndex);
-
-        this.#cycleImageOnTimer();
+        if (this.#hasImages) {
+            const firstImageIndex = 0;
+            const firstImage = this.#imagesContainer.children[firstImageIndex];
+            this.#setCurrentImage(firstImage, firstImageIndex);
+            this.#cycleImageOnTimer();
+        }
     }
 
     #cycleImageOnTimer() {
@@ -191,7 +196,11 @@ export default class ImageCarousel {
         button.classList.add(ImageCarousel.CLASSES.advanceImageButton);
         button.textContent = textContent;
         button.ariaLabel = ariaLabel;
-        button.addEventListener('click', onClick);
+
+        if (this.#hasImages) {
+            button.addEventListener('click', onClick);
+        }
+
         return button;
     }
 
