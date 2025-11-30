@@ -11,7 +11,7 @@ const styleString = `
 
   grid-template-areas:
     '. .      .'
-    '. navbar .'
+    '. navbar .';
 }
 
 .${ImageCarousel.CLASSES.advanceImageButton} {
