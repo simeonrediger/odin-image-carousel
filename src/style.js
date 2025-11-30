@@ -40,9 +40,9 @@ const styleString = `
 }
 
 .${ImageCarousel.CLASSES.navItemButton} {
-  border-radius: 0.75rem;
-  height: 0.75rem;
-  width: 0.75rem;
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
 }
 
 `;
