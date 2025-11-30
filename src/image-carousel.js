@@ -18,6 +18,7 @@ export default class ImageCarousel {
     #selectedNavItemButton;
 
     #hasImages;
+    #intervalId;
 
     constructor(containerElement) {
         this.#container = containerElement;
@@ -57,7 +58,8 @@ export default class ImageCarousel {
     }
 
     #cycleImageOnTimer() {
-        setInterval(this.#showNextImage.bind(this), 5000);
+        clearInterval(this.#intervalId);
+        this.#intervalId = setInterval(this.#showNextImage.bind(this), 5000);
     }
 
     #setCurrentImage(image, index) {
@@ -76,6 +78,8 @@ export default class ImageCarousel {
         this.#selectedNavItemButton.classList.add(
             ImageCarousel.CLASSES.selectedNavItemButton,
         );
+
+        this.#cycleImageOnTimer();
     }
 
     #showPreviousImage() {
