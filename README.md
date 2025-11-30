@@ -1,6 +1,6 @@
 # Odin Image Carousel
 
-An attribute-driven image carousel.
+An attribute-driven image carousel wrapper utility.
 
 # Installation
 
