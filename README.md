@@ -28,6 +28,8 @@ import imageCarousel from '@simeonrediger/image-carousel';
 imageCarousel.init({ root, cycleIntervalInMs });
 ```
 
+The image carousel dimensions will be based on the widest image's width and the tallest image's height. Images that are narrower or shorter will be centered in the image carousel.
+
 # Options
 
 ## `root`
