@@ -245,6 +245,10 @@ export default class ImageCarousel {
 
     #validateCycleInterval(cycleInterval) {
         if (typeof cycleInterval !== 'number' && cycleInterval !== null) {
+            if (cycleInterval !== undefined) {
+                console.error('Cycle interval must be a number or null');
+            }
+
             this.#cycleInterval = ImageCarousel.defaultCycleIntervalInMs;
         }
     }
