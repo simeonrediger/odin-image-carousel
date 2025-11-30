@@ -13,6 +13,14 @@ export default class ImageCarousel {
 
     static defaultCycleIntervalInMs = 5000;
 
+    static cycleIntervalIsValid(cycleInterval) {
+        return (
+            (typeof cycleInterval === 'number' && cycleInterval >= 0) ||
+            cycleInterval === undefined ||
+            cycleInterval === null
+        );
+    }
+
     #container;
     #imagesContainer;
     #currentImage;
@@ -244,11 +252,10 @@ export default class ImageCarousel {
     }
 
     #validateCycleInterval(cycleInterval) {
-        if (typeof cycleInterval !== 'number' && cycleInterval !== null) {
-            if (cycleInterval !== undefined) {
-                console.error('Cycle interval must be a number or null');
-            }
-
+        if (
+            cycleInterval === undefined ||
+            !ImageCarousel.cycleIntervalIsValid(cycleInterval)
+        ) {
             this.#cycleInterval = ImageCarousel.defaultCycleIntervalInMs;
         }
     }
