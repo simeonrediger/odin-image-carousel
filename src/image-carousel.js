@@ -47,6 +47,12 @@ export default class ImageCarousel {
         const firstImageIndex = 0;
         const firstImage = this.#imagesContainer.children[firstImageIndex];
         this.#setCurrentImage(firstImage, firstImageIndex);
+
+        this.#cycleImageOnTimer();
+    }
+
+    #cycleImageOnTimer() {
+        setInterval(this.#showNextImage.bind(this), 5000);
     }
 
     #setCurrentImage(image, index) {
