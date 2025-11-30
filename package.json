@@ -2,7 +2,11 @@
   "name": "@simeonrediger/image-carousel",
   "version": "1.0.0",
   "description": "An attribute-driven image carousel wrapper utility.",
-  "keywords": [],
+  "keywords": [
+    "image",
+    "carousel",
+    "wrapper"
+  ],
   "homepage": "https://github.com/simeonrediger/odin-image-carousel",
   "bugs": {
     "url": "https://github.com/simeonrediger/odin-image-carousel/issues"
