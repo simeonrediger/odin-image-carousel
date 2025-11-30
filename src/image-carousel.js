@@ -2,6 +2,8 @@ export default class ImageCarousel {
     static CLASSES = Object.freeze({
         container: 'image-carousel-container',
         advanceImageButton: 'image-carousel-advance-image-button',
+        previousImageButton: 'image-carousel-previous-image-button',
+        nextImageButton: 'image-carousel-next-image-button',
         imagesContainer: 'image-carousel-images-container',
         image: 'image-carousel-image',
         currentImage: 'image-carousel-current-image',
@@ -206,6 +208,7 @@ export default class ImageCarousel {
             onClick: this.#showPreviousImage.bind(this),
         });
 
+        button.classList.add(ImageCarousel.CLASSES.previousImageButton);
         return button;
     }
 
@@ -216,6 +219,7 @@ export default class ImageCarousel {
             onClick: this.#showNextImage.bind(this),
         });
 
+        button.classList.add(ImageCarousel.CLASSES.nextImageButton);
         return button;
     }
 
