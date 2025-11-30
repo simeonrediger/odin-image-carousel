@@ -11,6 +11,8 @@ export default class ImageCarousel {
         selectedNavItemButton: 'image-carousel-selected-nav-item-button',
     });
 
+    static defaultCycleIntervalInMs = 5000;
+
     #container;
     #imagesContainer;
     #currentImage;
@@ -18,10 +20,15 @@ export default class ImageCarousel {
     #selectedNavItemButton;
 
     #hasImages;
+    #cyclesImages;
+    #cycleInterval;
     #intervalId;
 
-    constructor(containerElement) {
+    constructor(containerElement, cycleIntervalInMs) {
         this.#container = containerElement;
+        this.#cycleInterval = cycleIntervalInMs;
+        this.#validateCycleInterval(cycleIntervalInMs);
+        this.#cyclesImages = this.#cycleInterval !== null;
         this.#build();
     }
 
@@ -53,13 +60,20 @@ export default class ImageCarousel {
             const firstImageIndex = 0;
             const firstImage = this.#imagesContainer.children[firstImageIndex];
             this.#setCurrentImage(firstImage, firstImageIndex);
-            this.#cycleImageOnTimer();
+
+            if (this.#cyclesImages) {
+                this.#cycleImageOnTimer();
+            }
         }
     }
 
     #cycleImageOnTimer() {
         clearInterval(this.#intervalId);
-        this.#intervalId = setInterval(this.#showNextImage.bind(this), 5000);
+
+        this.#intervalId = setInterval(
+            this.#showNextImage.bind(this),
+            this.#cycleInterval,
+        );
     }
 
     #setCurrentImage(image, index) {
@@ -79,7 +93,9 @@ export default class ImageCarousel {
             ImageCarousel.CLASSES.selectedNavItemButton,
         );
 
-        this.#cycleImageOnTimer();
+        if (this.#cyclesImages) {
+            this.#cycleImageOnTimer();
+        }
     }
 
     #showPreviousImage() {
@@ -225,6 +241,12 @@ export default class ImageCarousel {
 
         navbar.addEventListener('click', this.#selectImage.bind(this));
         return navbar;
+    }
+
+    #validateCycleInterval(cycleInterval) {
+        if (typeof cycleInterval !== 'number' && cycleInterval !== null) {
+            this.#cycleInterval = ImageCarousel.defaultCycleIntervalInMs;
+        }
     }
 
     #validateImages(images) {

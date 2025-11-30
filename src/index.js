@@ -3,12 +3,12 @@ import imageCarouselStyle from './style.js';
 
 const imageCarouselAttribute = 'data-image-carousel';
 
-function init(root = document) {
+function init({ root = document, cycleIntervalInMs } = {}) {
     injectStyle(imageCarouselStyle);
     const imageCarousels = root.querySelectorAll(`[${imageCarouselAttribute}]`);
 
     for (const imageCarousel of imageCarousels) {
-        new ImageCarousel(imageCarousel);
+        new ImageCarousel(imageCarousel, cycleIntervalInMs);
     }
 }
 
