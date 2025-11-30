@@ -35,6 +35,10 @@ const styleString = `
 }
 
 .${ImageCarousel.CLASSES.navList} {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
   display: flex;
   gap: 1rem;
 }
