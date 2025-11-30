@@ -8,12 +8,14 @@ export default class ImageCarousel {
         navbar: 'image-carousel-navbar',
         navList: 'image-carousel-nav-list',
         navItemButton: 'image-carousel-nav-item-button',
+        selectedNavItemButton: 'image-carousel-selected-nav-item-button',
     });
 
     #container;
     #imagesContainer;
     #currentImage;
     #navList;
+    #selectedNavItemButton;
 
     constructor(containerElement) {
         this.#container = containerElement;
@@ -27,8 +29,6 @@ export default class ImageCarousel {
         this.#validateImages(images);
         this.#addClassToImages(images);
         this.#imagesContainer = this.#createImagesContainer(images);
-        const firstImage = this.#imagesContainer.children[0];
-        this.#setCurrentImage(firstImage);
 
         const previousImageButton = this.#createPreviousImageButton();
         const nextImageButton = this.#createNextImageButton();
@@ -43,15 +43,28 @@ export default class ImageCarousel {
         );
 
         this.#setGridDimensions(images);
+
+        const firstImageIndex = 0;
+        const firstImage = this.#imagesContainer.children[firstImageIndex];
+        this.#setCurrentImage(firstImage, firstImageIndex);
     }
 
-    #setCurrentImage(image) {
+    #setCurrentImage(image, index) {
         this.#currentImage?.classList.remove(
             ImageCarousel.CLASSES.currentImage,
         );
 
+        this.#selectedNavItemButton?.classList.remove(
+            ImageCarousel.CLASSES.selectedNavItemButton,
+        );
+
         this.#currentImage = image;
         this.#currentImage.classList.add(ImageCarousel.CLASSES.currentImage);
+
+        this.#selectedNavItemButton = this.#navList.children[index].children[0];
+        this.#selectedNavItemButton.classList.add(
+            ImageCarousel.CLASSES.selectedNavItemButton,
+        );
     }
 
     #showPreviousImage() {
@@ -62,7 +75,7 @@ export default class ImageCarousel {
             (currentImageIndex - 1 + images.length) % images.length;
 
         const previousImage = images[previousImageIndex];
-        this.#setCurrentImage(previousImage);
+        this.#setCurrentImage(previousImage, previousImageIndex);
     }
 
     #showNextImage() {
@@ -70,7 +83,7 @@ export default class ImageCarousel {
         const currentImageIndex = images.indexOf(this.#currentImage);
         const nextImageIndex = (currentImageIndex + 1) % images.length;
         const nextImage = images[nextImageIndex];
-        this.#setCurrentImage(nextImage);
+        this.#setCurrentImage(nextImage, nextImageIndex);
     }
 
     #selectImage(event) {
@@ -84,7 +97,7 @@ export default class ImageCarousel {
         const imageIndex = Array.from(this.#navList.children).indexOf(navItem);
         const images = this.#imagesContainer.children;
         const selectedImage = images[imageIndex];
-        this.#setCurrentImage(selectedImage);
+        this.#setCurrentImage(selectedImage, imageIndex);
     }
 
     #addClassToImages(images) {

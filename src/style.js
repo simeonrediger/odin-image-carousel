@@ -45,6 +45,10 @@ const styleString = `
   width: 1rem;
 }
 
+.${ImageCarousel.CLASSES.selectedNavItemButton} {
+  background-color: #6af;
+}
+
 `;
 
 const style = document.createElement('style');
